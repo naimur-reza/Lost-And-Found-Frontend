@@ -9,68 +9,111 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 
-const pages = ["Home", "About us"];
+const navItems = [
+  {
+    path: "/",
+    name: "Home",
+  },
+  {
+    path: "/about-us",
+    name: "About Us",
+  },
+];
 
-function ResponsiveAppBar() {
+function Navbar(props: { window?: () => Window }) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
+
+  const drawerWidth = 240;
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        MUI
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map((item, index) => (
+          <ListItem key={index} disablePadding>
+            <Link href={item.path} passHref>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Box
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Raleway', sans-serif",
-              fontWeight: 600,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: ".5rem",
             }}
           >
-            RetrieveX
-          </Typography>
+            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Raleway, sans-serif",
+                fontWeight: 600,
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              RetrieveX
+            </Typography>
+          </Box>
 
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            {navItems.map((item) => (
+              <Link key={item.path} href={item.path} passHref>
+                <Button sx={{ color: "#fff" }}>{item.name}</Button>
+              </Link>
+            ))}
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={handleDrawerToggle}
               color="inherit"
             >
               <MenuIcon />
@@ -88,15 +131,16 @@ function ResponsiveAppBar() {
                 horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+              {navItems.map((item) => (
+                <Link key={item.path} href={item.path} passHref>
+                  <MenuItem>
+                    <Typography textAlign="center">{item.name}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -119,33 +163,43 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
           <Box sx={{ display: "flex", gap: "1rem" }}>
-            <Link href="/register">
+            <Link href="/register" passHref>
               <Button color="secondary" variant="contained">
                 Sign up
               </Button>
             </Link>
-            <Link href="/login">
+            <Link href="/login" passHref>
               <Button color="success" variant="contained">
                 Login
               </Button>
             </Link>
           </Box>
         </Toolbar>
+
+        <nav>
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </nav>
       </Container>
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+
+export default Navbar;
