@@ -14,8 +14,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import Link from "next/link";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Home", "About us"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -131,12 +132,16 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ display: "flex", gap: "1rem" }}>
-            <Button color="secondary" variant="contained">
-              Sign up
-            </Button>
-            <Button color="success" variant="contained">
-              Login
-            </Button>
+            <Link href="/register">
+              <Button color="secondary" variant="contained">
+                Sign up
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button color="success" variant="contained">
+                Login
+              </Button>
+            </Link>
           </Box>
         </Toolbar>
       </Container>

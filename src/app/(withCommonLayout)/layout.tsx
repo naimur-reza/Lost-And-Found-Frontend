@@ -1,4 +1,5 @@
-import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/Shared/Footer";
+import Navbar from "@/components/Shared/Navbar";
 import { TChildren } from "@/types/common";
 
 const layout = ({ children }: TChildren) => {
@@ -6,6 +7,7 @@ const layout = ({ children }: TChildren) => {
     <>
       <Navbar />
       {children}
+      <Footer />
     </>
   );
 };
