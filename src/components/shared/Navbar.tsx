@@ -21,7 +21,11 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import AuthButtons from "../UI/AuthButtons";
+import dynamic from "next/dynamic";
+
+const AuthButtons = dynamic(() => import("@/components/UI/AuthButtons"), {
+  ssr: false,
+});
 
 const navItems = [
   {

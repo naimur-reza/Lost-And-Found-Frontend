@@ -49,6 +49,7 @@ const Login = () => {
       toast.success("User logged in successfully.");
       storeUserInfo(user?.data?.token);
       router.push("/");
+      router.refresh();
     } else {
       setError(user.message);
     }
