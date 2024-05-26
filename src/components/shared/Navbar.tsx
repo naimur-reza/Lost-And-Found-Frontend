@@ -21,6 +21,7 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
+import AuthButtons from "../UI/AuthButtons";
 
 const navItems = [
   {
@@ -48,29 +49,6 @@ function Navbar(props: { window?: () => Window }) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
-  const AuthButtons = () => {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          gap: ".5rem",
-          flexDirection: { xs: "column", md: "row" },
-        }}
-      >
-        <Link href="/register" passHref>
-          <Button color="secondary" variant="contained">
-            Sign up
-          </Button>
-        </Link>
-        <Link href="/login" passHref>
-          <Button color="success" variant="contained">
-            Login
-          </Button>
-        </Link>
-      </Box>
-    );
-  };
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>

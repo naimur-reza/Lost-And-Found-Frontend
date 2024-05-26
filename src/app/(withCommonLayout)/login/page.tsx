@@ -15,6 +15,10 @@ import Container from "@mui/material/Container";
 import RxInputs from "@/components/Forms/RXInput";
 import RxForm from "@/components/Forms/RXForm";
 import { FieldValues } from "react-hook-form";
+import { loginUser } from "@/services/actions/action";
+import { useRouter } from "next/navigation";
+import { storeUserInfo } from "@/services/auth.services";
+import { toast } from "sonner";
 
 function Copyright(props: any) {
   return (
@@ -25,7 +29,7 @@ function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         RetrieveX
       </Link>{" "}
       {new Date().getFullYear()}
@@ -34,11 +38,27 @@ function Copyright(props: any) {
   );
 }
 
-const handleSubmit = (data: FieldValues) => {
-  console.log(data);
-};
-
 const Login = () => {
+  const [error, setError] = React.useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSubmit = async (data: FieldValues) => {
+    const user = await loginUser(data);
+
+    if (user.success) {
+      toast.success("User logged in successfully.");
+      storeUserInfo(user?.data?.token);
+      router.push("/");
+    } else {
+      setError(user.message);
+    }
+  };
+
+  const defaultValues = {
+    email: "john@example.com",
+    password: "password",
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,7 +76,12 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component={RxForm} onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box
+          component={RxForm}
+          defaultValues={defaultValues}
+          onSubmit={handleSubmit}
+          sx={{ mt: 1 }}
+        >
           <RxInputs
             size="small"
             type="email"
@@ -78,10 +103,16 @@ const Login = () => {
             type="password"
             autoComplete="current-password"
           />
+          {error && (
+            <Typography variant="body2" color="error">
+              {error}
+            </Typography>
+          )}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+
           <Button
             type="submit"
             fullWidth

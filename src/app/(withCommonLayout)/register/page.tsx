@@ -15,30 +15,32 @@ import Container from "@mui/material/Container";
 import RxInputs from "@/components/Forms/RXInput";
 import RxForm from "@/components/Forms/RXForm";
 import { FieldValues } from "react-hook-form";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        RetrieveX
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const handleSubmit = (data: FieldValues) => {
-  console.log(data);
-};
+import { Copyright } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
+import { registerUser } from "@/services/actions/action";
+import { toast } from "sonner";
 
 const Register = () => {
+  const [error, setError] = React.useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSubmit = async (data: FieldValues) => {
+    const user = await registerUser(data);
+
+    if (user.success) {
+      toast.success("User registered successfully.");
+      router.push("/login");
+    } else {
+      setError(user.message);
+    }
+  };
+
+  const defaultValues = {
+    name: "",
+    email: "",
+    password: "",
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,7 +58,12 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component={RxForm} onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box
+          component={RxForm}
+          defaultValues={defaultValues}
+          onSubmit={handleSubmit}
+          sx={{ mt: 1 }}
+        >
           <RxInputs
             size="small"
             margin="normal"
@@ -66,15 +73,6 @@ const Register = () => {
             name="name"
             autoComplete="name"
             autoFocus
-          />
-          <RxInputs
-            size="small"
-            margin="normal"
-            required
-            fullWidth
-            label="Mobile"
-            name="mobile"
-            autoComplete="mobile"
           />
           <RxInputs
             size="small"
@@ -96,6 +94,13 @@ const Register = () => {
             type="password"
             autoComplete="current-password"
           />
+
+          {error && (
+            <Typography variant="body2" color="error">
+              {error}
+            </Typography>
+          )}
+
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
