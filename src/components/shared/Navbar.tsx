@@ -64,9 +64,9 @@ function Navbar(props: { window?: () => Window }) {
         {navItems.map((item, index) => (
           <ListItem key={index} disablePadding>
             <Link href={item.path} passHref>
-              <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItem sx={{ textAlign: "center", fontWeight: "medium" }}>
                 <ListItemText primary={item.name} />
-              </ListItemButton>
+              </ListItem>
             </Link>
           </ListItem>
         ))}

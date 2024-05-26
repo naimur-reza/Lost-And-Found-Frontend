@@ -3,22 +3,26 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#164863",
+      main: "#0F0F0F",
     },
     secondary: {
-      main: "#427D9D",
+      main: "#232D3F",
     },
     success: {
-      main: "#9BBEC8",
+      main: "#535C91",
     },
   },
 
   components: {
     MuiButton: {
-      // defaultProps: {
-      //   variant: "contained",
-      // },
+      defaultProps: {
+        variant: "contained",
+      },
     },
+  },
+
+  typography: {
+    fontWeightMedium: 500,
   },
 });
 
