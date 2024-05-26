@@ -9,7 +9,7 @@ const HeroSection = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "100vh",
+          height: "calc(100vh - 64px)",
           gap: "3rem",
           textAlign: "center",
         }}
@@ -64,8 +64,8 @@ const HeroSection = () => {
           </Box>
         </Box>
 
-        <div className=" absolute w-[450px] opacity-50 h-[200px] -left-12 top-52 bg-gradient-to-t  from-[#6f2494] to-[#231455e0] blur-[75px] -z-10" />
-        <div className=" absolute w-[300px] right-0 opacity-50 h-[200px]  top-10 bg-gradient-to-t  from-[#27015c] to-[#0c3588] blur-[70px] " />
+        <div className=" absolute w-[450px] opacity-50 h-[200px] -left-12 top-52 bg-gradient-to-t  from-[#6f2494c5] to-[#231455e0] blur-[75px] -z-10" />
+        <div className=" absolute w-[330px] right-0 opacity-50 h-[200px]  top-10 bg-gradient-to-t  from-[#27015c] to-[#0c3588] blur-[70px] " />
       </Container>
     </Box>
   );
