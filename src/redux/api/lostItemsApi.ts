@@ -16,7 +16,7 @@ const lostItemsApi = baseApi.injectEndpoints({
     reportLostItem: builder.mutation({
       query: (data) => ({
         url: "/lost-items",
-        body: data,
+        data,
         method: "POST",
       }),
     }),

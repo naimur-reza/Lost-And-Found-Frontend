@@ -25,11 +25,12 @@ const ReportLostItem = () => {
 
   const { data, isLoading: cateLoading } =
     useGetLostItemsCategoryQuery(undefined);
+  console.log(data);
 
   const [reportLostItem] = useReportLostItemMutation();
 
-  const categories = data?.data?.map((category: any) => category.name) || [];
-  const categoryData = data?.data || [];
+  const categories = data?.map((category: any) => category.name) || [];
+  const categoryData = data || [];
 
   const handleSubmit = async (formData: any) => {
     setIsLoading(true);
@@ -48,28 +49,30 @@ const ReportLostItem = () => {
       (category: any) => category.name === formData.categoryId
     );
 
-    const postData = {
+    const data = {
       itemName: formData.itemName,
       categoryId: category.id,
       description: formData.description || "",
       location: formData.location || "",
       date: combinedDateTime,
       brand: formData.brand,
-      image: imageData ? imageData?.data?.display_url : "",
+      image: imageData
+        ? imageData?.data?.display_url
+        : "https://i.ibb.co/MfPHHpX/IMG-20210401-WA0017.jpg",
       timeLost: dayjs(formData.timeLost).format("HH:mm"),
       primaryColor: formData.primaryColor,
       secondaryColor: formData.secondaryColor,
     };
 
-    console.log(postData);
+    console.log(data);
 
     // Perform the POST request here
 
     try {
-      const data = await reportLostItem(postData);
+      const res = await reportLostItem(data);
       toast.success("Lost item reported successfully");
       setIsLoading(false);
-      console.log(data);
+      console.log(res);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
