@@ -55,20 +55,29 @@ function Navbar(props: { window?: () => Window }) {
     window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        backgroundColor: "primary.main",
+        height: "100%",
+      }}
+    >
       <Typography variant="h6" sx={{ my: 2 }}>
         MUI
       </Typography>
       <Divider />
       <List>
         {navItems.map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <Link href={item.path} passHref>
-              <ListItem sx={{ textAlign: "center", fontWeight: "medium" }}>
+          <Link key={index} href={item.path} passHref>
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{ textAlign: "center", fontWeight: "medium" }}
+              >
                 <ListItemText primary={item.name} />
-              </ListItem>
-            </Link>
-          </ListItem>
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
@@ -83,7 +92,7 @@ function Navbar(props: { window?: () => Window }) {
   );
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "primary.main" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Box
@@ -113,10 +122,15 @@ function Navbar(props: { window?: () => Window }) {
             </Typography>
           </Box>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ display: { xs: "none", sm: "flex", gap: "1rem" } }}>
             {navItems.map((item) => (
               <Link key={item.path} href={item.path} passHref>
-                <Button sx={{ color: "#fff" }}>{item.name}</Button>
+                <Button
+                  sx={{ color: "#fff", fontWeight: "medium" }}
+                  variant="text"
+                >
+                  {item.name}
+                </Button>
               </Link>
             ))}
           </Box>

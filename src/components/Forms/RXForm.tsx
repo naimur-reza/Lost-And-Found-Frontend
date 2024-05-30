@@ -31,7 +31,7 @@ const RxForm = ({
     formConfig["defaultValues"] = defaultValues;
   }
 
-  const methods = useForm(formConfig);
+  const methods = useForm({ ...formConfig, mode: "all" });
   const { handleSubmit, reset } = methods;
 
   const submit: SubmitHandler<FieldValues> = async (data) => {

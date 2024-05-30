@@ -7,7 +7,7 @@ interface IFormInputs {
   type?: "text" | "password" | "email";
   variant?: "outlined" | "filled" | "standard";
   size?: "small" | "medium";
-  required: boolean;
+  required?: boolean;
   fullWidth?: boolean;
   margin?: "normal" | "dense" | "none";
   autoFocus?: boolean;

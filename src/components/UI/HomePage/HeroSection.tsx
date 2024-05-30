@@ -1,4 +1,5 @@
 import { Box, Button, Container, Typography } from "@mui/material";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -59,8 +60,17 @@ const HeroSection = () => {
               justifyContent: "center",
             }}
           >
-            <Button color="success">Report a Lost Item</Button>
-            <Button color="success">Report a Found Item</Button>
+            <Link href="/report-lost-item" passHref>
+              <Button color="success" variant="contained">
+                Report a Lost Item
+              </Button>
+            </Link>
+
+            <Link href="/report-found-item" passHref>
+              <Button color="success" variant="outlined">
+                Report a Found Item
+              </Button>
+            </Link>
           </Box>
         </Box>
 

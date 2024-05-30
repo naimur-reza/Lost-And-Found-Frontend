@@ -23,10 +23,10 @@ const AboutSection = () => {
             </Typography>
             <Typography variant="body1" gutterBottom color="grey">
               Welcome to our community-driven{" "}
-              <span className="font-semibold">RetrieveX</span> platform. We help
-              you report and reclaim lost items efficiently. Whether you&#39;ve
-              lost or found something valuable, we&#39;re here to assist every
-              step of the way.
+              <Typography sx={{ font: "medium" }}>RetrieveX</Typography>{" "}
+              platform. We help you report and reclaim lost items efficiently.
+              Whether you&#39;ve lost or found something valuable, we&#39;re
+              here to assist every step of the way.
             </Typography>
             <Typography variant="body1" gutterBottom color="grey">
               Our user-friendly platform offers features for reporting items,
