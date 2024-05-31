@@ -22,11 +22,11 @@ const AboutSection = () => {
               About Us
             </Typography>
             <Typography variant="body1" gutterBottom color="grey">
-              Welcome to our community-driven{" "}
-              <Typography sx={{ font: "medium" }}>RetrieveX</Typography>{" "}
-              platform. We help you report and reclaim lost items efficiently.
-              Whether you&#39;ve lost or found something valuable, we&#39;re
-              here to assist every step of the way.
+              Welcome to our community-driven
+              <strong> RetrieveX</strong> platform. We help you report and
+              reclaim lost items efficiently. Whether you&#39;ve lost or found
+              something valuable, we&#39;re here to assist every step of the
+              way.
             </Typography>
             <Typography variant="body1" gutterBottom color="grey">
               Our user-friendly platform offers features for reporting items,

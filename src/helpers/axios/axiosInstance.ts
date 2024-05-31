@@ -1,4 +1,5 @@
 import { authKey } from "@/constants/authKey";
+import { IErrorResponse, IResponseType } from "@/types/requestTypes";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
 
@@ -31,9 +32,11 @@ instance.interceptors.response.use(
   //@ts-ignore
   function (response) {
     const responseData = {
-      data: response?.data?.data,
-      meta: response?.data?.meta,
-      message: response?.data?.message,
+      data: {
+        data: response?.data?.data,
+        meta: response?.data?.meta || null,
+        message: response?.data?.message,
+      },
     };
 
     return responseData;
@@ -43,7 +46,7 @@ instance.interceptors.response.use(
       // Redirect to login page
       console.log("Unauthorized");
     } else {
-      const errorResponse = {
+      const errorResponse: IErrorResponse = {
         statusCode: error?.response?.data?.statusCode || 500,
         message: error?.response?.data?.message || "Something went wrong!",
         errorMessages: error?.response?.data?.message,

@@ -6,28 +6,27 @@ import RxForm from "@/components/Forms/RXForm";
 import RxInputs from "@/components/Forms/RXInput";
 import RXSelectField from "@/components/Forms/RXSelect";
 import RXTimePicker from "@/components/Forms/RXTimePicker";
-import { reportLostItemSchema } from "@/schema/lostItemValidation";
 import uploadImage from "@/utils/uploadImage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Container, Grid, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import { useState } from "react";
-import {
-  useGetLostItemsCategoryQuery,
-  useReportLostItemMutation,
-} from "@/redux/api/lostItemsApi";
 import dayjs from "dayjs";
 import { toast } from "sonner";
+import {
+  useGetFoundItemsCategoryQuery,
+  useReportFoundItemMutation,
+} from "@/redux/api/foundItemApi";
 
 const ReportLostItem = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { data, isLoading: cateLoading } =
-    useGetLostItemsCategoryQuery(undefined);
+    useGetFoundItemsCategoryQuery(undefined);
   console.log(data);
 
-  const [reportLostItem] = useReportLostItemMutation();
+  const [reportFoundItem] = useReportFoundItemMutation();
 
   const categories = data?.data?.map((category: any) => category.name) || [];
   const categoryData = data?.data || [];
@@ -40,8 +39,8 @@ const ReportLostItem = () => {
       : undefined;
 
     const combinedDateTime = dayjs(formData.date)
-      .set("hour", dayjs(formData.timeLost).hour())
-      .set("minute", dayjs(formData.timeLost).minute())
+      .set("hour", dayjs(formData.timeFound).hour())
+      .set("minute", dayjs(formData.timeFound).minute())
       .toISOString();
 
     console.log(imageData);
@@ -59,7 +58,7 @@ const ReportLostItem = () => {
       image: imageData
         ? imageData?.data?.display_url
         : "https://i.ibb.co/MfPHHpX/IMG-20210401-WA0017.jpg",
-      timeLost: dayjs(formData.timeLost).format("HH:mm"),
+      timeFound: dayjs(formData.timeFound).format("HH:mm"),
       primaryColor: formData.primaryColor,
       secondaryColor: formData.secondaryColor,
     };
@@ -69,8 +68,10 @@ const ReportLostItem = () => {
     // Perform the POST request here
 
     try {
-      const res = await reportLostItem(data);
-      toast.success("Lost item reported successfully");
+      const res = await reportFoundItem(data).unwrap();
+
+      toast.success("Found item reported");
+
       setIsLoading(false);
       console.log(res);
     } catch (error) {
@@ -93,7 +94,7 @@ const ReportLostItem = () => {
   return (
     <Container sx={{ my: 3 }}>
       <Typography sx={{ fontSize: 24, fontWeight: "medium" }}>
-        Submit Lost Property
+        Submit Found Property
       </Typography>
 
       <Grid container spacing={2}>
@@ -101,14 +102,13 @@ const ReportLostItem = () => {
           <Typography
             sx={{ fontSize: 14, fontWeight: "medium", color: "grey" }}
           >
-            Please provide the following details to help us locate your lost
-            item.
+            Please fill out the form below to report a found item
           </Typography>
         </Grid>
 
         <RxForm
           onSubmit={handleSubmit}
-          // resolver={zodResolver(reportLostItemSchema)}
+          //   resolver={zodResolver(reportLostItemSchema)}
           defaultValues={defaultValues}
         >
           <Grid
@@ -119,7 +119,7 @@ const ReportLostItem = () => {
           >
             <Grid item xs={12} sm={6}>
               <RxInputs
-                label="What was Lost"
+                label="Item name"
                 name="itemName"
                 autoFocus
                 size="small"
@@ -128,7 +128,7 @@ const ReportLostItem = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <RXDatePicker
-                label="Date Lost"
+                label="Date found"
                 name="date"
                 size="small"
                 fullWidth
@@ -146,8 +146,8 @@ const ReportLostItem = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <RXTimePicker
-                label="Time Lost"
-                name="timeLost"
+                label="Time Found"
+                name="timeFound"
                 size="small"
                 fullWidth
               />

@@ -13,82 +13,23 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
-import {
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
 import dynamic from "next/dynamic";
+import Sidebar from "./Navbar/Drawer";
+import { navItems } from "@/constants/navItems";
 
-const AuthButtons = dynamic(() => import("@/components/UI/AuthButtons"), {
-  ssr: false,
-});
+function Navbar() {
+  const AuthButtons = dynamic(() => import("@/components/UI/AuthButtons"), {
+    ssr: false,
+  });
 
-const navItems = [
-  {
-    path: "/",
-    name: "Home",
-  },
-  {
-    path: "/about-us",
-    name: "About Us",
-  },
-];
-
-function Navbar(props: { window?: () => Window }) {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const drawerWidth = 240;
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{
-        textAlign: "center",
-        backgroundColor: "primary.main",
-        height: "100%",
-      }}
-    >
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item, index) => (
-          <Link key={index} href={item.path} passHref>
-            <ListItem disablePadding>
-              <ListItemButton
-                sx={{ textAlign: "center", fontWeight: "medium" }}
-              >
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <Box
-        sx={{
-          my: 2,
-        }}
-      >
-        <AuthButtons />
-      </Box>
-    </Box>
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
   );
 
   return (
@@ -188,7 +129,7 @@ function Navbar(props: { window?: () => Window }) {
               textDecoration: "none",
             }}
           >
-            LOGO
+            RetrieveX
           </Typography>
           <Box
             sx={{
@@ -199,26 +140,7 @@ function Navbar(props: { window?: () => Window }) {
           </Box>
         </Toolbar>
 
-        <nav>
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </nav>
+        <Sidebar />
       </Container>
     </AppBar>
   );
