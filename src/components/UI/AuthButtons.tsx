@@ -84,10 +84,10 @@ const AuthButtons = () => {
             }}
           >
             <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <PersonOutlineOutlinedIcon fontSize="small" />
+              </ListItemIcon>
               <Link href="/profile">
-                <ListItemIcon>
-                  <PersonOutlineOutlinedIcon fontSize="small" />
-                </ListItemIcon>
                 <Typography variant="inherit">Profile</Typography>
               </Link>
             </MenuItem>
