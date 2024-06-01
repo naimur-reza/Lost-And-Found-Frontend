@@ -1,11 +1,12 @@
 "use client";
 
 import { RecentItemCard } from "@/components/Card/RecentItemCard";
+import LoadingCardSkeleton from "@/components/Loader/LoadingCardSkeleton";
 import { useGetAllLostItemsQuery } from "@/redux/api/lostItemsApi";
 import { Container, Grid, Typography } from "@mui/material";
 
 const RecentLostItems = () => {
-  const { data } = useGetAllLostItemsQuery({
+  const { data, isLoading } = useGetAllLostItemsQuery({
     limit: 6,
   });
 
@@ -35,19 +36,23 @@ const RecentLostItems = () => {
         them.
       </Typography>
 
-      <Grid
-        sx={{ flexGrow: 1 }}
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        {data?.data?.map((item: any) => (
-          <Grid item key={item.id} xs={12} sm={6} md={4}>
-            <RecentItemCard item={item} />
-          </Grid>
-        ))}
-      </Grid>
+      {isLoading ? (
+        <LoadingCardSkeleton />
+      ) : (
+        <Grid
+          sx={{ flexGrow: 1 }}
+          container
+          spacing={2}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          {data?.data?.map((item: any) => (
+            <Grid item key={item.id} xs={12} sm={6} md={4}>
+              <RecentItemCard item={item} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 };
