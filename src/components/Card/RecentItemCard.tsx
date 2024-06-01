@@ -6,6 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
+import { Box } from "@mui/material";
+import { formatTimeAgo } from "@/utils/formatTimesAgo";
 
 export const RecentItemCard = ({
   item,
@@ -14,32 +16,62 @@ export const RecentItemCard = ({
     image: string;
     description: string;
     itemName: string;
+    createdAt: string;
   };
 }) => {
-  const { image, description, itemName } = item;
+  const { image, description, itemName, createdAt } = item;
+
+  const timeAgo = formatTimeAgo(createdAt);
 
   return (
-    <Card sx={{ maxWidth: "200" }}>
-      <CardMedia sx={{ height: 150 }}>
+    <Card>
+      <Box
+        sx={{
+          position: "relative",
+          height: 220,
+        }}
+      >
         <Image
-          layout="responsive"
-          width={250}
-          height={150}
-          alt="item_image"
           src={image}
+          alt={itemName}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
         />
-      </CardMedia>
+      </Box>
 
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {itemName}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              color: "white",
+              fontSize: {
+                xs: "1rem",
+                md: "1.2rem",
+              },
+            }}
+          >
+            {itemName}
+          </Typography>
+
+          <Typography variant="body2" color="text.secondary">
+            {timeAgo}
+          </Typography>
+        </Box>
+        <Typography sx={{ mt: 1 }} variant="body2" color="text.secondary">
+          {description.slice(0, 30)}...
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Claim</Button>
+        <Button size="small" color="info" variant="text">
+          View details
+        </Button>
       </CardActions>
     </Card>
   );
