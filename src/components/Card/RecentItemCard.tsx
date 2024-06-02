@@ -8,18 +8,20 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import { Box } from "@mui/material";
 import { formatTimeAgo } from "@/utils/formatTimesAgo";
+import Link from "next/link";
 
 export const RecentItemCard = ({
   item,
 }: {
   item: {
+    id: string;
     image: string;
     description: string;
     itemName: string;
     createdAt: string;
   };
 }) => {
-  const { image, description, itemName, createdAt } = item;
+  const { id, image, description, itemName, createdAt } = item;
 
   const timeAgo = formatTimeAgo(createdAt);
 
@@ -69,9 +71,11 @@ export const RecentItemCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="info" variant="text">
-          View details
-        </Button>
+        <Link href={`/lost-item/${id}`} passHref>
+          <Button size="small" color="primary">
+            View Details
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

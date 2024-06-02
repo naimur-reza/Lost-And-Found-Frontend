@@ -7,7 +7,9 @@ export interface IResponseType {
 }
 
 export interface IErrorResponse {
-  statusCode: number;
-  message: string;
-  errorMessages: string;
+  error: {
+    statusCode: number;
+    message: string;
+    errorMessages: string;
+  };
 }

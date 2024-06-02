@@ -8,6 +8,7 @@ import React from "react";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/authKey";
@@ -85,15 +86,30 @@ const AuthButtons = () => {
           >
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
-                <PersonOutlineOutlinedIcon fontSize="small" />
+                <PersonOutlineOutlinedIcon
+                  sx={{ color: "white" }}
+                  fontSize="small"
+                />
               </ListItemIcon>
               <Link href="/profile">
                 <Typography variant="inherit">Profile</Typography>
               </Link>
             </MenuItem>
+
+            {user?.role == "ADMIN" && (
+              <MenuItem>
+                <ListItemIcon>
+                  <DashboardIcon sx={{ color: "white" }} fontSize="small" />
+                </ListItemIcon>
+                <Link href="/dashboard">
+                  <Typography variant="inherit">Dashboard</Typography>
+                </Link>
+              </MenuItem>
+            )}
+
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
-                <LogoutOutlinedIcon fontSize="small" />
+                <LogoutOutlinedIcon sx={{ color: "red" }} fontSize="small" />
               </ListItemIcon>
               <Typography variant="inherit">Logout</Typography>
             </MenuItem>

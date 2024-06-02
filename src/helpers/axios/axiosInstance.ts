@@ -47,9 +47,11 @@ instance.interceptors.response.use(
       console.log("Unauthorized");
     } else {
       const errorResponse: IErrorResponse = {
-        statusCode: error?.response?.data?.statusCode || 500,
-        message: error?.response?.data?.message || "Something went wrong!",
-        errorMessages: error?.response?.data?.message,
+        error: {
+          statusCode: error?.response?.data?.statusCode || 500,
+          message: error?.response?.data?.message || "Something went wrong!",
+          errorMessages: error?.response?.data?.message,
+        },
       };
 
       return errorResponse;

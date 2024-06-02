@@ -9,7 +9,7 @@ export const storeUserInfo = (token: string) => {
 export const getUserInfo = () => {
   const token = getFromLocalStorage(authKey);
   if (token) {
-    const decodedData = jwtDecode(token);
+    const decodedData = jwtDecode(token) as any;
     return decodedData;
   }
 };
