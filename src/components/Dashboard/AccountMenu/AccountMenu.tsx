@@ -102,7 +102,7 @@ export default function AccountMenu() {
       >
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Avatar sx={{ background: "transparent", color: "primary.main" }} />
+            <Avatar sx={{ background: "transparent", color: "#ffffff" }} />
           </ListItemIcon>
           Profile
         </MenuItem>
