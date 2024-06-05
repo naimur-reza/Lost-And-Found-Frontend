@@ -1,6 +1,6 @@
-import { Container, Skeleton, Stack } from "@mui/material";
+import { Skeleton, Stack } from "@mui/material";
 
-const SkeletonLoading = () => {
+const SkeletonDetailsLoading = () => {
   return (
     <Stack spacing={2} direction="column">
       <Skeleton variant="rounded" width={"100%"} height={300} />
@@ -9,4 +9,4 @@ const SkeletonLoading = () => {
   );
 };
 
-export default SkeletonLoading;
+export default SkeletonDetailsLoading;

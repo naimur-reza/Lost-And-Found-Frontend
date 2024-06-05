@@ -52,7 +52,7 @@ export default function DashboardDrawer({
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          background: "#F4F7FE",
+          background: "#f0f0f0",
           boxShadow: 0,
           borderBottom: "1px solid #ddd",
           py: 1,

@@ -30,7 +30,7 @@ const SideBar = () => {
   ];
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: "info.main", height: "100%" }}>
       <Stack
         sx={{
           py: 1,

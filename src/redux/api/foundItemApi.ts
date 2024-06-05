@@ -1,10 +1,17 @@
+import { QueryParams } from "@/types/common";
 import { baseApi } from "./baseApi";
 
 const foundItemsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllFoundItems: builder.query({
-      query: () => ({
+    getAllFoundItems: builder.query<any, QueryParams>({
+      query: ({ limit, page, searchTerm, sortBy }) => ({
         url: "/found-items",
+        params: {
+          limit,
+          page,
+          searchTerm,
+          sortBy,
+        },
       }),
     }),
     getFoundItemsCategory: builder.query({
@@ -20,6 +27,11 @@ const foundItemsApi = baseApi.injectEndpoints({
         method: "POST",
       }),
     }),
+    getSingleFoundItem: builder.query({
+      query: (id) => ({
+        url: `/found-items/${id}`,
+      }),
+    }),
   }),
 });
 
@@ -27,4 +39,5 @@ export const {
   useGetAllFoundItemsQuery,
   useGetFoundItemsCategoryQuery,
   useReportFoundItemMutation,
+  useGetSingleFoundItemQuery,
 } = foundItemsApi;

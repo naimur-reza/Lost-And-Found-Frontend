@@ -8,3 +8,10 @@ export interface IMeta {
   pages: number;
   limit: number;
 }
+
+export interface QueryParams {
+  limit?: number;
+  page?: number;
+  searchTerm?: string;
+  sortBy?: string;
+}

@@ -10,7 +10,7 @@ import { Box } from "@mui/material";
 import { formatTimeAgo } from "@/utils/formatTimesAgo";
 import Link from "next/link";
 
-export const RecentItemCard = ({
+export const FoundItemCard = ({
   item,
 }: {
   item: {
@@ -71,7 +71,7 @@ export const RecentItemCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Link href={`/lost-item/${id}`} passHref>
+        <Link href={`/found-item/${id}`} passHref>
           <Button size="small" color="primary">
             View Details
           </Button>

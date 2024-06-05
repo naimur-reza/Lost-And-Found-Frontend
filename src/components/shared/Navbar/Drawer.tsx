@@ -34,7 +34,7 @@ const Sidebar = (props: { window?: () => Window }) => {
       onClick={handleDrawerToggle}
       sx={{
         textAlign: "center",
-        backgroundColor: "primary.main",
+        backgroundColor: "info.main",
         height: "100%",
       }}
     >

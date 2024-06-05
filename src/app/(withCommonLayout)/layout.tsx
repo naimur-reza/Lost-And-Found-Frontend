@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 
 const layout = ({ children }: TChildren) => {
   return (
-    <>
+    <Box sx={{ backgroundColor: "#0e1217" }}>
       <Navbar />
       <Box
       // sx={{
@@ -15,7 +15,7 @@ const layout = ({ children }: TChildren) => {
         {children}
       </Box>
       <Footer />
-    </>
+    </Box>
   );
 };
 

@@ -2,18 +2,20 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "light",
     primary: {
-      main: "#0d0d0d9f",
+      main: "#0e1217",
     },
     secondary: {
       main: "#232D3F",
     },
     success: {
-      main: "#535C91",
+      main: "#f0f0f0",
+    },
+    info: {
+      main: "#131921",
     },
     background: {
-      default: "#121212",
+      default: "#0e1217",
       paper: "#1E1E1E",
     },
     text: {
@@ -45,21 +47,57 @@ const theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF", // Text color
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#535C91", // Border color
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "grey", // Border color on hover
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "grey", // Border color when focused
+          },
+        },
+        icon: {
+          color: "#FFFFFF", // Icon color
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF", // Label color
+          "&.Mui-focused": {
+            color: "#FFFFFF", // Label color when focused
+          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#1E1E1E", // Menu background color
+          color: "#FFFFFF", // Menu text color
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: "contained",
       },
     },
-
     MuiContainer: {
       defaultProps: {
         maxWidth: "md",
       },
     },
   },
-
   typography: {
     fontWeightMedium: 500,
+    fontFamily: "Poppins, sans-serif",
   },
 });
 

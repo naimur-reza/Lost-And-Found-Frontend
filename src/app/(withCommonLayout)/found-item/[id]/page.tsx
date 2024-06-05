@@ -6,17 +6,17 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container, Divider } from "@mui/material";
-import { useGetSingleLostItemQuery } from "@/redux/api/lostItemsApi";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import convertTo12HourFormat from "@/utils/convertTime";
 import { formatTimeAgo } from "@/utils/formatTimesAgo";
 import SkeletonDetailsLoading from "@/components/Loader/SkeletonDetailsLoading";
+import { useGetSingleFoundItemQuery } from "@/redux/api/foundItemApi";
 
 const ItemDetails = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
-  const { data, isLoading } = useGetSingleLostItemQuery(params.id) || {};
+  const { data, isLoading } = useGetSingleFoundItemQuery(params.id) || {};
 
   const {
     itemName,
@@ -25,7 +25,7 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
     brand,
     category,
     date,
-    timeLost,
+    timeFound,
     primaryColor,
     secondaryColor,
     location,
@@ -35,8 +35,8 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
   const { user } = data?.data || {};
 
   const formattedDate = new Date(date).toLocaleDateString();
-  const formattedTime = convertTo12HourFormat(timeLost || "23:12");
-  const publishedTime = formatTimeAgo(createdAt || "2024-05-30T18:00:00.000Z");
+  const formattedTime = convertTo12HourFormat(timeFound || "10:00");
+  const publishedTime = formatTimeAgo(createdAt || "2024-05-30T16:34:08.142Z");
   return (
     <Container sx={{ my: 2 }}>
       <Typography
@@ -94,14 +94,14 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
                   color="text.secondary"
                   component="div"
                 >
-                  <strong>Date Lost:</strong> {formattedDate}
+                  <strong>Date Found:</strong> {formattedDate}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
                   component="div"
                 >
-                  <strong>Time Lost:</strong> {formattedTime}
+                  <strong>Time Found:</strong> {formattedTime}
                 </Typography>
 
                 <Typography

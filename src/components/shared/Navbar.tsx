@@ -155,7 +155,7 @@ function Navbar(props: { window?: () => Window }) {
               {navItems.map((item) => (
                 <Link key={item.path} href={item.path} passHref>
                   <MenuItem>
-                    <Typography textAlign="center">{item.name}</Typography>
+                    <p className="text-center font-medium">{item.name}</p>
                   </MenuItem>
                 </Link>
               ))}

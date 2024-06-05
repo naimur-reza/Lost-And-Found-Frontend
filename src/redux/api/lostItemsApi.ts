@@ -1,18 +1,16 @@
+import { QueryParams } from "@/types/common";
 import { baseApi } from "./baseApi";
-
-interface LostItemsQueryParams {
-  limit?: number;
-  page?: number;
-}
 
 const lostItemsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllLostItems: builder.query<any, LostItemsQueryParams>({
-      query: ({ limit = 10, page = 1 } = {}) => ({
+    getAllLostItems: builder.query<any, QueryParams>({
+      query: ({ limit = 10, page = 1, searchTerm, sortBy } = {}) => ({
         url: "/lost-items",
         params: {
           limit,
           page,
+          searchTerm,
+          sortBy,
         },
       }),
     }),
