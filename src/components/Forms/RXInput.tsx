@@ -12,6 +12,8 @@ interface IFormInputs {
   margin?: "normal" | "dense" | "none";
   autoFocus?: boolean;
   autoComplete?: string;
+  multiline?: boolean;
+  rows?: number;
 }
 
 const RxInputs = ({
@@ -20,6 +22,8 @@ const RxInputs = ({
   variant,
   type,
   size,
+  multiline = false,
+  rows = 3,
   fullWidth,
   required,
   margin = "normal",
@@ -36,6 +40,8 @@ const RxInputs = ({
         rules={{ required: true }}
         render={({ field }) => (
           <TextField
+            rows={rows}
+            multiline={multiline}
             label={label}
             variant={variant}
             type={type}

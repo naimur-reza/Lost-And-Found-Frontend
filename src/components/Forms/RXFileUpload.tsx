@@ -10,9 +10,16 @@ type TProps = {
   name: string;
   label?: string;
   sx?: SxProps;
+  fullWidth?: boolean;
 };
 
-export default function RXFileUpload({ name, label, sx, disabled }: TProps) {
+export default function RXFileUpload({
+  name,
+  label,
+  sx,
+  disabled,
+  fullWidth,
+}: TProps) {
   const { control } = useFormContext();
 
   return (
@@ -22,6 +29,7 @@ export default function RXFileUpload({ name, label, sx, disabled }: TProps) {
       render={({ field: { onChange, value, ...field } }) => {
         return (
           <Button
+            fullWidth={fullWidth}
             disabled={disabled}
             color="success"
             component="label"
@@ -31,7 +39,7 @@ export default function RXFileUpload({ name, label, sx, disabled }: TProps) {
             startIcon={<CloudUploadIcon />}
             sx={{ ...sx }}
           >
-            {value?.name || label || "Upload file"}
+            {value?.name?.slice(0, 14) || label || "Upload file"}
             <Input
               {...field}
               type="file"

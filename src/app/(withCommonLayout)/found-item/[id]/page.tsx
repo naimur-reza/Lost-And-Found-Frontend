@@ -5,20 +5,24 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Container, Divider } from "@mui/material";
+import { Button, Container, Divider, Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import convertTo12HourFormat from "@/utils/convertTime";
 import { formatTimeAgo } from "@/utils/formatTimesAgo";
 import SkeletonDetailsLoading from "@/components/Loader/SkeletonDetailsLoading";
 import { useGetSingleFoundItemQuery } from "@/redux/api/foundItemApi";
+import RXModal from "@/components/Shared/RXModal/RXModal";
+import ClaimItemModal from "../claim/ClaimItemModal";
 
 const ItemDetails = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
+  const [open, setOpen] = React.useState(false);
 
   const { data, isLoading } = useGetSingleFoundItemQuery(params.id) || {};
 
   const {
+    id,
     itemName,
     description,
     image,
@@ -153,12 +157,20 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
           <Card sx={{ mt: 2, backgroundColor: "info.main" }}>
             <CardContent>
               <Typography variant="h5">Published by</Typography>
-              <Typography variant="h6" sx={{ mt: 2 }}>
-                {user?.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {user?.email}
-              </Typography>
+              <Stack spacing={2}>
+                <Box>
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {user?.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {user?.email}
+                  </Typography>
+                </Box>
+
+                <Button onClick={() => setOpen(true)}>Claim Item</Button>
+
+                <ClaimItemModal id={id} open={open} setOpen={setOpen} />
+              </Stack>
             </CardContent>
           </Card>
         </>
