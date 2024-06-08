@@ -1,37 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Name: Lost and Found System
 
-## Getting Started
+## Description:
 
-First, run the development server:
+The Lost and Found System is a web application designed to help users report lost items and search for found items. It provides a platform for users to report details about lost items they have misplaced and for others to report found items they have discovered. The goal is to facilitate the recovery of lost items by connecting owners with finders.
+
+## Documentation
+
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/naimur-reza/Lost-And-Found-Frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd my-project
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  pnpm  dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+To run this project, you will need to add the following environment variables to your .env file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`PORT`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-"# Lost-And-Found-Frontend" 
+`DATABASE_URL`
+
+`JWT_ACCESS_SECRET`
+
+`JWT_TOKEN_EXPIRES_IN`
+
+## Tech Stack
+
+
+**Server:** Node, Express, Typescript
+
+**Database:** Postgresql, Prisma
+
+**Authentication**: JSON Web Tokens (JWT)
+
+**Validation**: Zod, EsLint
+
+**Deployment**: Supabase, Vercel
