@@ -33,7 +33,7 @@ const AccountInformation = () => {
         <Grid container spacing={2} alignItems="center">
           <Grid item>
             <Avatar sx={{ bgcolor: "primary.main", width: 56, height: 56 }}>
-              <Person fontSize="large" />
+              {name?.slice(0, 1)}
             </Avatar>
           </Grid>
 

@@ -30,8 +30,8 @@ export const RecentItemCard = ({
       <Box
         sx={{
           position: "relative",
-          height: 220,
         }}
+        height={{ xs: 240, md: 280 }}
       >
         <Image
           src={image}
@@ -67,7 +67,7 @@ export const RecentItemCard = ({
           </Typography>
         </Box>
         <Typography sx={{ mt: 1 }} variant="body2" color="text.secondary">
-          {description.slice(0, 30)}...
+          {description?.slice(0, 30)}...
         </Typography>
       </CardContent>
       <CardActions>

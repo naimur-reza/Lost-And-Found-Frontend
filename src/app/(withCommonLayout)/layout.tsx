@@ -3,7 +3,7 @@ import Navbar from "@/components/Shared/Navbar";
 import { TChildren } from "@/types/common";
 import { Box } from "@mui/material";
 
-const layout = ({ children }: TChildren) => {
+const WithoutDashboardLayout = ({ children }: TChildren) => {
   return (
     <Box sx={{ backgroundColor: "#0e1217" }}>
       <Navbar />
@@ -19,4 +19,4 @@ const layout = ({ children }: TChildren) => {
   );
 };
 
-export default layout;
+export default WithoutDashboardLayout;

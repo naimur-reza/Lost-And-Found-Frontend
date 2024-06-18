@@ -172,13 +172,13 @@ function Navbar(props: { window?: () => Window }) {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontWeight: 600,
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            RetrieveX
           </Typography>
           <Box
             sx={{

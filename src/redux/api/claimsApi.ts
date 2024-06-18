@@ -5,7 +5,10 @@ const claimsApi = baseApi.injectEndpoints({
     createClaim: builder.mutation({
       query: (data) => ({ url: "/claims", method: "POST", data }),
     }),
+    getMyClaims: builder.query({
+      query: () => ({ url: "/claims/my-claims" }),
+    }),
   }),
 });
 
-export const { useCreateClaimMutation } = claimsApi;
+export const { useCreateClaimMutation, useGetMyClaimsQuery } = claimsApi;

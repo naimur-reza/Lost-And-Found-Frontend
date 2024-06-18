@@ -15,23 +15,40 @@ import Container from "@mui/material/Container";
 import RxInputs from "@/components/Forms/RXInput";
 import RxForm from "@/components/Forms/RXForm";
 import { FieldValues } from "react-hook-form";
-import { Copyright } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/services/actions/action";
 import { toast } from "sonner";
+
+function Copyright(props: any) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="/">
+        RetrieveX
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const Register = () => {
   const [error, setError] = React.useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (data: FieldValues) => {
-    const user = await registerUser(data);
+    const user = (await registerUser(data)) as any;
 
-    if (user.success) {
+    if (user?.success) {
       toast.success("User registered successfully.");
       router.push("/login");
     } else {
-      setError(user.message);
+      setError(user?.message);
     }
   };
 
@@ -108,6 +125,7 @@ const Register = () => {
           <Button
             type="submit"
             fullWidth
+            color="success"
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
@@ -115,7 +133,7 @@ const Register = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link href="/login" variant="body2" sx={{ color: "grey" }}>
                 {"Already have an account? Sign In"}
               </Link>
             </Grid>

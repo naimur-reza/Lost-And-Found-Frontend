@@ -6,16 +6,11 @@ import { getUserInfo } from "@/services/auth.services";
 import { Box, Container, Divider, Typography, Tabs, Tab } from "@mui/material";
 import { useState } from "react";
 import AccountInformation from "./TabItems/AccountInformation";
-import MyClaimRequests from "./TabItems/MyClaimRequests";
+import MyClaimRequests from "./TabItems/MyClaimRequests/MyClaimRequests";
 import MyLostItems from "./TabItems/MyLostItems";
 
 const Profile = () => {
-  const { data } = useGetMyProfileQuery(undefined);
-  const [value, setValue] = useState(0); // Start with index 0
-  const user = getUserInfo();
-
-  console.log(user);
-  console.log(data);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -44,8 +39,7 @@ const Profile = () => {
           indicatorColor="secondary"
           aria-label="secondary tabs example"
         >
-          <Tab value={0} label="Account Information" />{" "}
-          {/* Start with value 0 */}
+          <Tab value={0} label="Account Information" />
           <Tab value={1} label="My Lost Items" />
           <Tab value={2} label="My Claim Requests" />
         </Tabs>

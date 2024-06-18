@@ -31,6 +31,7 @@ const HeroSection = () => {
                 md: "1.7rem",
               },
               fontWeight: "bold",
+              color: "success.main",
             }}
             component="h1"
           >
@@ -73,8 +74,8 @@ const HeroSection = () => {
           </Box>
         </Box>
 
-        <div className=" absolute w-[300px] lg:w-[450px] opacity-50 h-[200px] -left-52 lg:-left-12 top-52 bg-gradient-to-t  from-[#cf25b0e4] to-[#2f1c8fec] blur-[80px] z-10" />
-        <div className=" absolute w-[330px] lg:[300px] -right-44 lg:right-0 opacity-50 h-[200px]  top-10 bg-gradient-to-t  from-[#341461] to-[#0c3588] blur-[70px] hidden lg:block " />
+        <div className=" absolute w-[300px] lg:w-[450px] opacity-50 h-[200px] -left-44 lg:-left-12 top-52 bg-gradient-to-t  from-[#cf25b0e4] to-[#2f1c8fec] blur-[80px] z-10" />
+        <div className=" absolute w-[200px] lg:w-[300px] lg:[300px] right-0 opacity-50 h-[200px]  top-10 bg-gradient-to-t  from-[#341461] to-[#0c3588] blur-[70px]  " />
       </Container>
     </Box>
   );

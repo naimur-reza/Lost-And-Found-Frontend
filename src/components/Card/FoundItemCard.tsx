@@ -30,15 +30,15 @@ export const FoundItemCard = ({
       <Box
         sx={{
           position: "relative",
-          height: 220,
         }}
+        height={{ xs: 280, md: 300 }}
       >
         <Image
           src={image}
           alt={itemName}
           layout="fill"
           objectFit="cover"
-          objectPosition="center"
+          objectPosition="top"
         />
       </Box>
 

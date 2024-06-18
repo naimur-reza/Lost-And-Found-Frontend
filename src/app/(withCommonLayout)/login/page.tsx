@@ -56,8 +56,8 @@ const Login = () => {
   };
 
   const defaultValues = {
-    email: "john@example.com",
-    password: "password",
+    email: "",
+    password: "",
   };
 
   return (
@@ -136,15 +136,8 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/register" variant="body2">
-                <Typography
-                  sx={{
-                    fontSize: 14,
-                    color: "grey",
-                  }}
-                >
-                  Don&#39;t have an account? Sign Up
-                </Typography>
+              <Link href="/register" variant="body2" sx={{ color: "grey" }}>
+                Don&#39;t have an account? Sign Up
               </Link>
             </Grid>
           </Grid>

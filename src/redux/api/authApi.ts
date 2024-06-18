@@ -5,7 +5,23 @@ const authApi = baseApi.injectEndpoints({
     getMyProfile: builder.query({
       query: () => ({ url: "/my-profile" }),
     }),
+
+    login: builder.mutation({
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    register: builder.mutation({
+      query: (data) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetMyProfileQuery } = authApi;
+export const { useGetMyProfileQuery, useLoginMutation, useRegisterMutation } =
+  authApi;

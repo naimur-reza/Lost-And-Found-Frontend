@@ -5,7 +5,14 @@ const LoadingCardSkeleton = () => {
   return (
     <Grid container spacing={2}>
       {Array.from(new Array(6)).map((_, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index} sx={{ width: 210 }}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          key={index}
+          width={{ xs: "100%", md: 200 }}
+        >
           <Skeleton
             animation="wave"
             variant="rectangular"

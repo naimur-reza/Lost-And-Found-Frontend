@@ -8,7 +8,7 @@ import RXSelectField from "@/components/Forms/RXSelect";
 import RXTimePicker from "@/components/Forms/RXTimePicker";
 import uploadImage from "@/utils/uploadImage";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import { useState } from "react";
@@ -92,7 +92,7 @@ const ReportLostItem = () => {
   };
 
   return (
-    <Container sx={{ my: 3 }}>
+    <Box maxWidth={"md"} sx={{ my: 3, mx: { xs: 2, md: "auto" } }}>
       <Typography sx={{ fontSize: 24, fontWeight: "medium" }}>
         Submit Found Property
       </Typography>
@@ -212,7 +212,7 @@ const ReportLostItem = () => {
           </Grid>
         </RxForm>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 
