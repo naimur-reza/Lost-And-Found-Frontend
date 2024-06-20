@@ -8,9 +8,9 @@ const WithoutDashboardLayout = ({ children }: TChildren) => {
     <Box sx={{ backgroundColor: "#0e1217" }}>
       <Navbar />
       <Box
-      // sx={{
-      //   height: "calc(100vh - 64px)",
-      // }}
+        sx={{
+          minHeight: "calc(100vh - 64px)",
+        }}
       >
         {children}
       </Box>

@@ -1,29 +1,32 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getFromLocalStorage } from "./utils/local-storage";
+import { cookies } from "next/headers";
 import { authKey } from "./constants/authKey";
-import { getUserInfo } from "./services/auth.services";
+import { getToken, getUserInfo } from "./services/auth.services";
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const { role } = getUserInfo() || {};
-
-  const token = getFromLocalStorage(authKey);
+  // Retrieve the token from cookies
+  const token = cookies().get(authKey)?.value;
 
   if (!token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (role === "ADMIN" && pathname.startsWith("/dashboard")) {
-    return NextResponse.next();
-  }
-
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/dashboard/:page*",
+  matcher: [
+    "/dashboard/:path*",
+    "/profile",
+    "/report-lost-item",
+    "/report-found-item",
+    "/lost-items/:path*",
+    "/found-items/:path*",
+    "/lost-item/:path*",
+  ],
 };

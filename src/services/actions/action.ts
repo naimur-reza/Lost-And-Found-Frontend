@@ -1,4 +1,7 @@
 "use server";
+import { authKey } from "@/constants/authKey";
+import { cookies } from "next/headers";
+import setAccessToken from "./setAccessToken";
 
 export const registerUser = async (data: any) => {
   try {
@@ -23,8 +26,15 @@ export const loginUser = async (data: any) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include", // Include credentials to handle cookies
     });
-    return await response.json();
+    const userData = await response.json();
+
+    if (userData?.data?.token) {
+      setAccessToken(userData.data.token);
+    }
+
+    return userData;
   } catch (error) {
     console.error("An error occurred", error);
   }

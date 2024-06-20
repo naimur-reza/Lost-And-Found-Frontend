@@ -5,7 +5,7 @@ export const baseApi = createApi({
   reducerPath: "api",
 
   baseQuery: axiosBaseQuery({
-    baseUrl: "https://lost-and-found-system-taupe.vercel.app/api",
+    baseUrl: "http://localhost:5000/api",
   }),
   endpoints: () => ({}),
   tagTypes: ["users", "items"],

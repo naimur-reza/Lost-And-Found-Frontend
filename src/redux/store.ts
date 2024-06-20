@@ -12,7 +12,6 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import authSlice from "./auth/authSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,11 +19,8 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, authSlice);
-
 export const store = configureStore({
   reducer: {
-    authSlice,
     [baseApi.reducerPath]: baseApi.reducer,
   },
 
@@ -35,8 +31,6 @@ export const store = configureStore({
       },
     }).concat(baseApi.middleware),
 });
-
-export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

@@ -2,7 +2,6 @@
 
 import { RecentItemCard } from "@/components/Card/RecentItemCard";
 import LoadingCardSkeleton from "@/components/Loader/LoadingCardSkeleton";
-import SkeletonDetailsLoading from "@/components/Loader/SkeletonDetailsLoading";
 import {
   useGetAllLostItemsQuery,
   useGetLostItemsCategoryQuery,
@@ -84,7 +83,7 @@ const LostItems = () => {
       </Grid>
 
       {isLoading ? (
-        <SkeletonDetailsLoading />
+        <LoadingCardSkeleton />
       ) : (
         <>
           <Grid

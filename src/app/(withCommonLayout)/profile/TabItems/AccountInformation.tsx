@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useGetMyProfileQuery } from "@/redux/api/authApi";
 import {
   Box,
@@ -14,9 +15,15 @@ import { Email, Person } from "@mui/icons-material";
 
 const AccountInformation = () => {
   const { data } = useGetMyProfileQuery({});
+  const [user, setUser] = useState({ name: "", email: "" });
 
-  const user = data?.data?.user || {};
-  const { name, email } = user || {};
+  useEffect(() => {
+    if (data?.data?.user) {
+      setUser(data.data.user);
+    }
+  }, [data]);
+
+  const { name, email } = user;
 
   return (
     <Card
@@ -49,7 +56,10 @@ const AccountInformation = () => {
           </Grid>
         </Grid>
         <Box mt={3}>
-          <Typography sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
+          <Typography
+            component="div"
+            sx={{ display: "flex", alignItems: "center", mb: 1.5 }}
+          >
             <Person sx={{ mr: 1 }} />
             <Typography
               variant="body1"
@@ -59,7 +69,10 @@ const AccountInformation = () => {
               Name: {name}
             </Typography>
           </Typography>
-          <Typography sx={{ display: "flex", alignItems: "center" }}>
+          <Typography
+            component="div"
+            sx={{ display: "flex", alignItems: "center" }}
+          >
             <Email sx={{ mr: 1 }} />
             <Typography
               variant="body2"

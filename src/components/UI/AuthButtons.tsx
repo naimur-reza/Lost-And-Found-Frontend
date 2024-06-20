@@ -12,6 +12,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/authKey";
+import { removeAccessToken } from "@/services/actions/removeAccessToken";
+import { logoutUser } from "@/services/actions/logoutUser";
 const AuthButtons = () => {
   const user = getUserInfo();
 
@@ -27,9 +29,7 @@ const AuthButtons = () => {
   };
 
   const handleLogout = () => {
-    removeFromLocalStorage(authKey);
-    router.push("/login");
-    // router.refresh()
+    logoutUser(router);
     handleClose();
   };
 

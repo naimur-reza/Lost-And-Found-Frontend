@@ -45,13 +45,13 @@ const Login = () => {
   const handleSubmit = async (data: FieldValues) => {
     const user = await loginUser(data);
 
-    if (user.success) {
+    if (user?.success) {
       toast.success("User logged in successfully.");
       storeUserInfo(user?.data?.token);
       router.push("/");
       router.refresh();
     } else {
-      setError(user.message);
+      setError(user?.message);
     }
   };
 
