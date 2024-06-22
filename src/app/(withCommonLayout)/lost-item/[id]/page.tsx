@@ -5,20 +5,28 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Container, Divider } from "@mui/material";
-import { useGetSingleLostItemQuery } from "@/redux/api/lostItemsApi";
+import { Button, Container, Divider, Stack } from "@mui/material";
+import {
+  useChangeLostItemStatusMutation,
+  useGetSingleLostItemQuery,
+} from "@/redux/api/lostItemsApi";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import convertTo12HourFormat from "@/utils/convertTime";
 import { formatTimeAgo } from "@/utils/formatTimesAgo";
 import SkeletonDetailsLoading from "@/components/Loader/SkeletonDetailsLoading";
+import { toast } from "sonner";
+import { getUserInfo } from "@/services/auth.services";
 
 const ItemDetails = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
+  const [changeStatus] = useChangeLostItemStatusMutation();
+
   const { data, isLoading } = useGetSingleLostItemQuery(params.id) || {};
 
   const {
+    id,
     itemName,
     description,
     image,
@@ -29,7 +37,10 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
     primaryColor,
     secondaryColor,
     location,
+
+    userId,
     createdAt,
+    isFound,
   } = data?.data || {};
 
   const { user } = data?.data || {};
@@ -37,6 +48,22 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
   const formattedDate = new Date(date).toLocaleDateString();
   const formattedTime = convertTo12HourFormat(timeLost || "23:12");
   const publishedTime = formatTimeAgo(createdAt || "2024-05-30T18:00:00.000Z");
+
+  const handleSubmit = async (id: string) => {
+    console.log(id);
+    const data = await changeStatus(id);
+
+    if (data?.data?.message) {
+      toast.success(data?.data?.message);
+    }
+  };
+
+  const currentUser = getUserInfo();
+
+  console.log(currentUser);
+
+  const isEligibleForFound = currentUser?.id === userId;
+
   return (
     <Container sx={{ my: 2 }}>
       <Typography
@@ -153,12 +180,29 @@ const ItemDetails = ({ params }: { params: { id: string } }) => {
           <Card sx={{ mt: 2, backgroundColor: "info.main" }}>
             <CardContent>
               <Typography variant="h5">Published by</Typography>
-              <Typography variant="h6" sx={{ mt: 2 }}>
-                {user?.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {user?.email}
-              </Typography>
+              <Stack
+                direction="row"
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Box>
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {user?.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {user?.email}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Button
+                    disabled={isFound || !isEligibleForFound}
+                    color="success"
+                    onClick={() => handleSubmit(id)}
+                  >
+                    {!isFound ? "Mark as Found" : "Item Found"}
+                  </Button>
+                </Box>
+              </Stack>
             </CardContent>
           </Card>
         </>

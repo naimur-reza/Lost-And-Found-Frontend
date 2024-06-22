@@ -1,8 +1,6 @@
 "use client";
 
 import TabPanel from "@/components/Tabs/TabPannel";
-import { useGetMyProfileQuery } from "@/redux/api/authApi";
-import { getUserInfo } from "@/services/auth.services";
 import { Box, Container, Divider, Typography, Tabs, Tab } from "@mui/material";
 import { useState } from "react";
 import AccountInformation from "./TabItems/AccountInformation";
@@ -28,10 +26,10 @@ const Profile = () => {
         >
           My Profile
         </Typography>
-        <Divider sx={{ mb: 2 }} color="grey" />
       </Box>
+      <Divider sx={{ mb: 2 }} color="grey" />
 
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%" }} component="div">
         <Tabs
           value={value}
           onChange={handleChange}

@@ -13,6 +13,7 @@ const lostItemsApi = baseApi.injectEndpoints({
           sortBy,
         },
       }),
+      providesTags: ["items"],
     }),
     getLostItemsCategory: builder.query({
       query: () => ({
@@ -32,11 +33,20 @@ const lostItemsApi = baseApi.injectEndpoints({
       query: (id) => ({
         url: `/lost-items/${id}`,
       }),
+      providesTags: ["items"],
     }),
     getMyLostItems: builder.query({
       query: () => ({
         url: `/lost-items/my-lost-items`,
       }),
+    }),
+
+    changeLostItemStatus: builder.mutation({
+      query: (id) => ({
+        url: `/lost-items/${id}/status`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["items"],
     }),
   }),
 });
@@ -47,4 +57,5 @@ export const {
   useReportLostItemMutation,
   useGetSingleLostItemQuery,
   useGetMyLostItemsQuery,
+  useChangeLostItemStatusMutation,
 } = lostItemsApi;

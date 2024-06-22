@@ -1,7 +1,10 @@
 import { authKey } from "@/constants/authKey";
+import { logoutInstance } from "@/services/actions/logoutInstance";
+import { logoutUser } from "@/services/actions/logoutUser";
 import { IErrorResponse, IResponseType } from "@/types/requestTypes";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
+import Router from "next/router";
 
 const instance = axios.create();
 
@@ -42,9 +45,10 @@ instance.interceptors.response.use(
     return responseData;
   },
   function (error) {
-    if (error?.response?.data?.statusCode === 401) {
-      // Redirect to login page
-      console.log("Unauthorized");
+    console.log(error);
+    if (error?.response?.data?.message === "jwt expired" || "jwt malformed") {
+      logoutInstance();
+      Router.push("/login");
     } else {
       const errorResponse: IErrorResponse = {
         error: {
