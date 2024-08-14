@@ -5,9 +5,10 @@
 The Lost and Found System is a web application designed to help users report lost items and search for found items. It provides a platform for users to report details about lost items they have misplaced and for others to report found items they have discovered. The goal is to facilitate the recovery of lost items by connecting owners with finders.
 
 
-##Credentials
+## Admin Credentials
 
-##Admin: email: naimur.rezaa001@gmail.com  password: naimur.rezaa001@gmail.com
+- **Email:** naimur.rezaa001@gmail.com
+- **Password:** naimur.rezaa001@gmail.com
 
 
 
